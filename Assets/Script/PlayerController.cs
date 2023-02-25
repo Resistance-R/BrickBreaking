@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private float jumpForce = 10;
-    
+
     private bool isGrounded = false;
     private Rigidbody2D myRigid;
 
@@ -25,18 +25,18 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-       float moveInput = Input.GetAxisRaw("Horizontal");
-       myRigid.velocity = new Vector2(moveInput * moveSpeed, myRigid.velocity.y);
+        float moveInput = Input.GetAxisRaw("Horizontal");
+        myRigid.velocity = new Vector2(moveInput * moveSpeed, myRigid.velocity.y);
 
-       if (Input.GetKeyDown(KeyCode.Space) && isGrounded == true)
-       {
-        myRigid.velocity = Vector2.up * jumpForce;
-       }
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded == true)
+        {
+            myRigid.velocity = Vector2.up * jumpForce;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.collider.tag == "Land")
+        if (collision.collider.tag == "Land")
         {
             isGrounded = true;
         }

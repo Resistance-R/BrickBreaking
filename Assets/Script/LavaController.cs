@@ -12,10 +12,10 @@ public class LavaController : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
-  
+
     void Update()
     {
         FillUp();
@@ -25,7 +25,7 @@ public class LavaController : MonoBehaviour
     private void FillUp()
     {
         timer += Time.deltaTime;
-        transform.position = new Vector2(0, transform.position.y + lavaSpeed * timer *0.01f);
+        transform.position = new Vector2(0, transform.position.y + lavaSpeed * timer * 0.01f);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -38,7 +38,7 @@ public class LavaController : MonoBehaviour
 
     private void GameOverDeclaration()
     {
-        if(gameOver == true)
+        if (gameOver == true)
         {
             Debug.Log("Game Over");
         }
