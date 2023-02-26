@@ -9,6 +9,9 @@ public class aboutPlatform : MonoBehaviour
 
     private float timer = 0;
     private int SpawnPlatform;
+    private int currentPlatformCount = 0;
+    private int maxPlatformCount = 10;
+    private GameObject[] prefabsToDestroy;
 
     void Start()
     {
@@ -17,7 +20,6 @@ public class aboutPlatform : MonoBehaviour
 
     void Update()
     {
-
     }
 
     private void Spawn()
@@ -26,11 +28,8 @@ public class aboutPlatform : MonoBehaviour
         LavaController script = gameObj.GetComponent<LavaController>();
         InvokeRepeating("Spawn", 1f, 0.5f);
 
-        if (script.gameOver == true)
+        if (script.gameOver == false && currentPlatformCount < maxPlatformCount)
         {
-            CancelInvoke("Spawn");
-            return;
-        }
 
         float xPos = Random.Range(-10f, 10f);
         float yPos = 0f;
@@ -57,7 +56,8 @@ public class aboutPlatform : MonoBehaviour
                 Instantiate(StPlatformBr, gameObject.transform.position = new Vector3(xPos, yPos, zPos), Quaternion.identity);
                 break;
         }
-        
+        currentPlatformCount++;
+        }
     }
 
     private int PlatformUp()
@@ -67,5 +67,28 @@ public class aboutPlatform : MonoBehaviour
         timer += Time.deltaTime;
         float PlatformSpace = timer * 1.5f + yPosSpace;
         return (int) PlatformSpace;
+    }
+
+    /*private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.tag == "Lava")
+        {
+            foreach(GameObject prefab in prefabsToDestroy)
+            {
+                Debug.Log("impacted!");
+            Destroy(prefab);
+            }
+        }
+    }*/
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.tag == "Lava")
+        {
+            if (gameObject.tag == "Land")
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 }
