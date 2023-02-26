@@ -327,6 +327,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 709036584}
+  - component: {fileID: 709036585}
   m_Layer: 0
   m_Name: PlatformGenerator
   m_TagString: Untagged
@@ -349,6 +350,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &709036585
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 709036583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec32893f2d06c48c38c4467300de5239, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Platform: {fileID: 8645661720104170192, guid: b86627c589df24a15ab2f001fd7bb98b, type: 3}
+  StPlatform: {fileID: 2975894035271229598, guid: f19c815d4a7094846b2cbd735e07d56d, type: 3}
+  PlatformBr: {fileID: 431438506113783816, guid: ac37329920287408bbba754e6c79f334, type: 3}
+  StPlatformBr: {fileID: 1427444097981021971, guid: 96e984e27ae544d8582368c84c71a0e9, type: 3}
 --- !u!1 &730257974
 GameObject:
   m_ObjectHideFlags: 0
@@ -612,7 +629,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &1842133089
 BoxCollider2D:
   m_ObjectHideFlags: 0

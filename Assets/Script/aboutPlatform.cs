@@ -4,37 +4,61 @@ using UnityEngine;
 
 public class aboutPlatform : MonoBehaviour
 {
-    public enum Type {Platform, StPlatform, PlatformBr, StPlatformBr};
-    public Type platformType;
+    [SerializeField]
+    GameObject Platform, StPlatform, PlatformBr, StPlatformBr;
+
+    private float timer = 0;
+    private int SpawnPlatform;
 
     void Start()
     {
-        SpawnSpot();
+        
     }
 
     void Update()
     {
-
+        Spawn();
     }
 
-    private void SpawnSpot()
+    private void Spawn()
     {
-        int childCount = transform.childCount;
-        if (childCount == 0)
-        {
-            Debug.LogError("There are no child objects!");
-            return;
-        }
-
-        int randomIndex = Random.Range(0, childCount);
-        Transform randomChild = transform.GetChild(randomIndex);
-
-        float xPos = randomChild.position.x;
-        float yPos = randomChild.position.y;
+        float xPos = Random.Range(-10f, 10f);
+        float yPos = 0f;
         float zPos = 0f;
 
-        GameObject platformPrefab = Resources.Load<GameObject>("Prefabs/" + platformType.ToString());
-        GameObject newPlatform = Instantiate(platformPrefab, new Vector3(xPos, yPos, zPos), Quaternion.identity);
-        newPlatform.transform.parent = randomChild;
+        yPos = PlatformUp();
+
+        SpawnPlatform = Random.Range(1,4);
+        switch (SpawnPlatform)
+        {
+            case 1:
+                Instantiate(Platform, gameObject.transform.position = new Vector3(xPos, yPos, zPos), Quaternion.identity);
+                break;
+            
+            case 2:
+                Instantiate(StPlatform, gameObject.transform.position = new Vector3(xPos, yPos, zPos), Quaternion.identity);
+                break;
+
+            case 3:
+                Instantiate(PlatformBr, gameObject.transform.position = new Vector3(xPos, yPos, zPos), Quaternion.identity);
+                break;
+
+            case 4:
+                Instantiate(StPlatformBr, gameObject.transform.position = new Vector3(xPos, yPos, zPos), Quaternion.identity);
+                break;
+
+            
+        }
+        InvokeRepeating("Spawn", 1f, 0.5f);
     }
+
+    private int PlatformUp()
+    {
+        int yPosSpace = Random.Range(1, 3);
+
+        timer += Time.deltaTime;
+        float PlatformSpace = timer * 1.5f + yPosSpace;
+        return (int) PlatformSpace;
+    }
+
 }
