@@ -482,6 +482,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lavaSpeed: 0.1
+  gameOver: 0
 --- !u!61 &1824990650
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -608,7 +609,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  jumpForce: 10
+  jumpForce: 15
 --- !u!50 &1842133088
 Rigidbody2D:
   serializedVersion: 4

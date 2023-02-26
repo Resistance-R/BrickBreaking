@@ -12,23 +12,33 @@ public class aboutPlatform : MonoBehaviour
 
     void Start()
     {
-        
+        Spawn();
     }
 
     void Update()
     {
-        Spawn();
+
     }
 
     private void Spawn()
     {
+        GameObject gameObj = GameObject.Find("Lava");
+        LavaController script = gameObj.GetComponent<LavaController>();
+        InvokeRepeating("Spawn", 1f, 0.5f);
+
+        if (script.gameOver == true)
+        {
+            CancelInvoke("Spawn");
+            return;
+        }
+
         float xPos = Random.Range(-10f, 10f);
         float yPos = 0f;
         float zPos = 0f;
 
         yPos = PlatformUp();
-
         SpawnPlatform = Random.Range(1,4);
+        
         switch (SpawnPlatform)
         {
             case 1:
@@ -46,19 +56,16 @@ public class aboutPlatform : MonoBehaviour
             case 4:
                 Instantiate(StPlatformBr, gameObject.transform.position = new Vector3(xPos, yPos, zPos), Quaternion.identity);
                 break;
-
-            
         }
-        InvokeRepeating("Spawn", 1f, 0.5f);
+        
     }
 
     private int PlatformUp()
     {
-        int yPosSpace = Random.Range(1, 3);
+        int yPosSpace = Random.Range(1,2);
 
         timer += Time.deltaTime;
         float PlatformSpace = timer * 1.5f + yPosSpace;
         return (int) PlatformSpace;
     }
-
 }

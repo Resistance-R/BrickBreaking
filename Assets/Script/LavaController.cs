@@ -8,7 +8,7 @@ public class LavaController : MonoBehaviour
     private float lavaSpeed = 0.1f;
 
     private float timer = 0f;
-    private bool gameOver = false;
+    public bool gameOver = false;
 
     void Start()
     {
