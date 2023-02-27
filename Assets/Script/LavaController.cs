@@ -9,10 +9,11 @@ public class LavaController : MonoBehaviour
 
     private float timer = 0f;
     public bool gameOver = false;
+    private Rigidbody2D RG;
 
     void Start()
     {
-
+        RG = GetComponent<Rigidbody2D>();
     }
 
 
@@ -40,6 +41,7 @@ public class LavaController : MonoBehaviour
     {
         if (gameOver == true)
         {
+            Time.timeScale = 0f;
             Debug.Log("Game Over");
         }
     }

@@ -11,18 +11,20 @@ public class aboutPlatform : MonoBehaviour
     private int SpawnPlatform;
     private int currentPlatformCount = 0;
     private int maxPlatformCount = 10;
-    private GameObject[] prefabsToDestroy;
+    private Rigidbody2D RG;
 
     void Start()
     {
+        RG = GetComponent<Rigidbody2D>();
         Spawn();
     }
 
     void Update()
     {
+
     }
 
-    private void Spawn()
+    public void Spawn()
     {
         GameObject gameObj = GameObject.Find("Lava");
         LavaController script = gameObj.GetComponent<LavaController>();
@@ -67,28 +69,5 @@ public class aboutPlatform : MonoBehaviour
         timer += Time.deltaTime;
         float PlatformSpace = timer * 1.5f + yPosSpace;
         return (int) PlatformSpace;
-    }
-
-    /*private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.tag == "Lava")
-        {
-            foreach(GameObject prefab in prefabsToDestroy)
-            {
-                Debug.Log("impacted!");
-            Destroy(prefab);
-            }
-        }
-    }*/
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.collider.tag == "Lava")
-        {
-            if (gameObject.tag == "Land")
-            {
-                Destroy(gameObject);
-            }
-        }
     }
 }
