@@ -62,12 +62,12 @@ public class aboutPlatform : MonoBehaviour
         }
     }
 
-    private int PlatformUp()
+    private float PlatformUp()
     {
         int yPosSpace = Random.Range(1,2);
 
         timer += Time.deltaTime;
         float PlatformSpace = timer * 1.5f + yPosSpace;
-        return (int) PlatformSpace;
+        return (float) PlatformSpace;
     }
 }
