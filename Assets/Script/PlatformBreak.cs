@@ -19,9 +19,7 @@ public class PlatformBreak : MonoBehaviour
 
         if (collision.collider.tag == "Lava")
         {
-            GameObject[] destroyPlatform = GameObject.FindGameObjectsWithTag("Land");
-            foreach(GameObject broken in destroyPlatform)
-            Destroy(broken);
+            Destroy(this.gameObject);
             Debug.Log("impact!");
         }
     }

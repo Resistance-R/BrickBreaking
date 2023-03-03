@@ -2,72 +2,57 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//G14_182
+//Smart14_182
+
 public class aboutPlatform : MonoBehaviour
 {
     [SerializeField]
     GameObject Platform, StPlatform, PlatformBr, StPlatformBr;
 
-    private float timer = 0;
-    private int SpawnPlatform;
-    private int currentPlatformCount = 0;
-    private int maxPlatformCount = 10;
-    private Rigidbody2D RG;
-
-    void Start()
+    void Start() 
     {
-        RG = GetComponent<Rigidbody2D>();
-        Spawn();
+     InvokeRepeating("Spawn", 1f, 1f);   
     }
 
-    void Update()
+    void Update() 
     {
-
-    }
-
-    public void Spawn()
-    {
-        GameObject gameObj = GameObject.Find("Lava");
-        LavaController script = gameObj.GetComponent<LavaController>();
-        InvokeRepeating("Spawn", 1f, 0.5f);
-
-        if (script.gameOver == false && currentPlatformCount < maxPlatformCount)
-        {
-
-        float xPos = Random.Range(-10f, 10f);
-        float yPos = 0f;
-        float zPos = 0f;
-
-        yPos = PlatformUp();
-        SpawnPlatform = Random.Range(1,4);
         
-        switch (SpawnPlatform)
+    }
+
+    private void Spawn()
+    {
+        int xPos = Random.Range(-10, 11);
+        float yPos = PlatformUp();
+        int PlatformSpawner = Random.Range(1, 5);
+
+        switch(PlatformSpawner)
         {
             case 1:
-                Instantiate(Platform, gameObject.transform.position = new Vector3(xPos, yPos, zPos), Quaternion.identity);
+                Instantiate(Platform, new Vector2(xPos, yPos), Quaternion.identity);
                 break;
-            
+
             case 2:
-                Instantiate(StPlatform, gameObject.transform.position = new Vector3(xPos, yPos, zPos), Quaternion.identity);
+                Instantiate(StPlatform, new Vector2(xPos, yPos), Quaternion.identity);
                 break;
 
             case 3:
-                Instantiate(PlatformBr, gameObject.transform.position = new Vector3(xPos, yPos, zPos), Quaternion.identity);
+                Instantiate(PlatformBr, new Vector2(xPos, yPos), Quaternion.identity);
                 break;
 
             case 4:
-                Instantiate(StPlatformBr, gameObject.transform.position = new Vector3(xPos, yPos, zPos), Quaternion.identity);
+                Instantiate(StPlatformBr, new Vector2(xPos, yPos), Quaternion.identity);
                 break;
-        }
-        currentPlatformCount++;
         }
     }
 
     private float PlatformUp()
     {
-        int yPosSpace = Random.Range(1,2);
+        float PlayerFinder = GameObject.Find("Player").transform.position.y;
+        float yPosSpace = Random.Range(0f, 2f);
+        float PlatformSpace = PlayerFinder + yPosSpace;
 
-        timer += Time.deltaTime;
-        float PlatformSpace = timer * 1.5f + yPosSpace;
-        return (float) PlatformSpace;
+        return(float) PlatformSpace;
     }
+
 }
